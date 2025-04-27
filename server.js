@@ -1,0 +1,58 @@
+const express = require ("express");
+const app = express();
+const PORT = 8000;
+const path = require ("path");
+
+const personRoute = require ("./routes/person");
+const menuRoute = require ("./routes/menu");
+
+const {logReqRes} = require ("./middlewares/index");
+
+// authentication using passport
+const passport = require ("./middlewares/auth");
+
+// Connection
+const {connectToMongoDb} = require ("./connection");
+
+const cookieParser = require ("cookie-parser");
+const {checkAuthentication} = require ("./middlewares/jwtauth");
+
+connectToMongoDb ("mongodb://127.0.0.1:27017/restaurant")
+.then (()=> console.log ("mongDb is connected !"))
+.catch ((err)=>  console.log ("error in mongoose connection"));
+
+// views
+app.set ("view engine", "ejs");
+app.set ("views", path.join (__dirname, "views"));
+                                
+// Middlewares
+app.use (express.json());
+
+app.use (express.urlencoded ({extended:false}));
+
+app.use (logReqRes ("log.txt"));
+
+app.use (passport.initialize());
+
+app.use (cookieParser());
+
+// app.use (checkAuthentication);
+
+const localAuthMiddleware = passport.authenticate ("local",{session:false});
+// temporarily we are not using local authentication since it was asking the username and the password
+// on each route now we will use tokens so that we can access any routes just after logging in
+
+// Home page
+// app.get ("/", (req,res)=> {
+//     return res.send ("Welcome To Our Restaurant");
+// });
+
+app.get("/", (req, res) => {
+    res.render("home", { user: req.user });
+});
+
+// Routes
+app.use ("/person", personRoute);
+app.use ("/menu",checkAuthentication,menuRoute);
+
+app.listen (PORT, ()=> console.log (`server started at PORT ${PORT}`));

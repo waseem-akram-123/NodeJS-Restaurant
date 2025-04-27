@@ -1,0 +1,70 @@
+{
+"name":"dahikadi",
+"price":10,
+"taste":"sour",
+"is_drink":"false",
+"ingredients":["water","spices","curd"],
+"num_sales":0
+}
+
+{
+"name": "rahul",
+"age": 19,
+"work": "waiter",
+"email": "rahul@gmail.com",
+"address": "aland colony",
+"salary": 30000
+}
+
+{
+"name": "mreenali",
+"age": 19,
+"work": "waiter",
+"email": "mreenali@gmail.com",
+"address": "khadri chowk",
+"salary": 30000,
+"username": "mreenaliamma",
+"password": "mreenali@123"
+}
+
+
+const {createHmac, randomBytes} = require ("crypto");
+
+
+userSchema.pre("save", async function (next) {
+  const user = this;
+    if (!user.isModified("password")) return next(); // Skip if password is not modified
+
+    const salt = randomBytes(16).toString("hex");
+
+    const hashedPassword = createHmac ("sha256", salt)
+      .update(user.password)
+      .digest("hex");
+
+      this.salt = salt;
+      this.password = hashedPassword;
+
+    next();
+});
+
+userSchema.statics.matchPassword = async function (email, password) {
+  const user = await this.findOne({ email });
+
+
+  if (!user) {
+    throw new Error("user not found ");
+  }
+  const salt = user.salt;
+  const hashedPassword = user.password;
+
+  const userProvidedHash = createHmac("sha256",salt)
+    .update(password)
+    .digest("hex");
+
+  if (hashedPassword !== userProvidedHash) {
+    throw new Error("incorrect password ");
+  }
+
+  const token = createTokenForUser (user);
+  return token;
+}
