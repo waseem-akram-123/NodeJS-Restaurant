@@ -1,7 +1,14 @@
+require("dotenv").config();
+
 const express = require ("express");
 const app = express();
-const PORT = 8000;
+// const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 const path = require ("path");
+
+// const mongoURL = process.env.LOCAL_MONGODB_URL;
+
+const mongoURL = process.env.MONGODB_URL;
 
 const personRoute = require ("./routes/person");
 const menuRoute = require ("./routes/menu");
@@ -17,11 +24,10 @@ const {connectToMongoDb} = require ("./connection");
 const cookieParser = require ("cookie-parser");
 const {checkAuthentication} = require ("./middlewares/jwtauth");
 
-connectToMongoDb ("mongodb://127.0.0.1:27017/restaurant")
+connectToMongoDb (mongoURL)
 .then (()=> console.log ("mongDb is connected !"))
-.catch ((err)=>  console.log ("error in mongoose connection"));
+.catch ((err)=>  console.log ("error in mongoose connection",err));
 
-// views
 app.set ("view engine", "ejs");
 app.set ("views", path.join (__dirname, "views"));
                                 
