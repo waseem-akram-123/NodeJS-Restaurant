@@ -56,3 +56,5 @@ app.use ("/person", personRoute);
 app.use ("/menu",checkAuthentication,menuRoute);
 
 app.listen (PORT, ()=> console.log (`server started at PORT ${PORT}`));
+
+// comment added to check github working is fine
