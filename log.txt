@@ -234,3 +234,5 @@ function now() { [native code] } : undefined : /person : ip address is ::1
 1745766148945 : GET : /css/styles.css : ip address is ::1  and /css/styles.css
 1745766156826 : GET : /menu : ip address is ::1  and /menu
 1745766156951 : GET : /css/styles.css : ip address is ::1  and /css/styles.css
+1745767922156 : GET : / : ip address is ::1  and /
+1745767922200 : GET : /css/styles.css : ip address is ::1  and /css/styles.css
