@@ -21,23 +21,33 @@
 //     checkAuthentication
 // }
 // middlewares/jwtauth.js      --- similar to blogging page where signup and sign doesn't require token ----- but we have to check manually if (!req.user) is there in every route
+
 const { validateToken } = require("../service/auth");
+const Person = require("../models/person");
 
-function checkAuthentication(req, res, next) {
-    const token = req.cookies?.token || req.header("Authorization")?.replace("Bearer ", "");
-    if (!token) return next(); // No token? Just move on
+async function checkAuthentication(req, res, next) {
+  const token =
+    req.cookies?.token || req.header("Authorization")?.replace("Bearer ", "");
+  if (!token) return next(); // No token? Just move on
 
-    try {
-        const decoded = validateToken(token);
-        req.user = decoded; // Attach user info to the request
-    } catch (err) {
-        console.log("Invalid token", err.message);
+  try {
+    const decoded = validateToken(token);
+    const person = await Person.findById(decoded._id);
+    if (person) {
+      req.user = person; // Now req.user all the details inclluding work field
     }
+  } catch (err) {
+    console.log("Invalid token", err.message);
+  }
 
-    next(); // Always call next
+  next(); // Always call next
 }
+
+module.exports = {
+  checkAuthentication,
+};
 
 
 module.exports = {
-    checkAuthentication
+  checkAuthentication,
 };

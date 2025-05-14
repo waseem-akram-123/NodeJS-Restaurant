@@ -1,19 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <%- include("partials/head") %>
-  <title>Home</title>
-</head>
-<body>
+  <head>
+    <%- include("./partials/head") %>
+    <title>Home page</title>
+    <style>
+      .hero-section {
+        background-image: url("/uploads/food-menu-restaurant-social-media-banner-template_608606-384.avif");
+        background-size: cover;
+        background-position: center 20%; /* Adjust the percentage to control the vertical position */
+        height: 430px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      .hero-content {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 8px;
+      }
 
-<%- include("navbar", { user: user }) %>
+      .section {
+        padding: 60px 0;
+      }
 
-<div class="container text-center my-5">
-  <h1>Welcome to Our Restaurant!</h1>
-  <p class="lead">Delicious food served with love ❤️</p>
-</div>
+      .section-title {
+        margin-bottom: 40px;
+        text-align: center;
+      }
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      .testimonial-card {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
 
-</body>
+      .testimonial-author {
+        font-weight: bold;
+        margin-top: 15px;
+        color: #6c757d;
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: #dc3545;
+      }
+
+      .about-img {
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include("./partials/nav") %>
+
+    <div class="hero-section">
+      <div class="hero-content text-center">
+        <h1>Welcome to Waseem's Kitchen!</h1>
+        <p class="lead">
+          Where every dish tells a story of passion and tradition
+        </p>
+        <a href="/menu" class="btn btn-primary mt-3">View Our Special Menu</a>
+        <a
+          href="#reservation"
+          class="btn btn-outline-light mt-3 ms-2"
+          onclick="bookTable()"
+          >Book a Table</a
+        >
+      </div>
+    </div>
+
+    <!-- About Us Section -->
+    <section class="section bg-light" id="about">
+      <div class="container">
+        <h2 class="section-title">Our Story</h2>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <img
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+              alt="Restaurant interior"
+              class="img-fluid about-img"
+            />
+          </div>
+          <div class="col-md-6">
+            <h3>Authentic Flavors Since 2010</h3>
+            <p>
+              Founded by Chef Waseem, our restaurant brings together generations
+              of culinary expertise. We source only the freshest local
+              ingredients to create dishes that celebrate both tradition and
+              innovation.
+            </p>
+            <p>
+              Our open kitchen concept allows you to witness the artistry behind
+              each plate, where every meal is prepared with attention to detail
+              and a dash of love.
+            </p>
+            <div class="row mt-4">
+              <div class="col-6 text-center">
+                <div class="feature-icon">
+                  <i class="bi bi-egg-fried"></i>
+                </div>
+                <h5>Fresh Ingredients</h5>
+              </div>
+              <div class="col-6 text-center">
+                <div class="feature-icon">
+                  <i class="bi bi-award"></i>
+                </div>
+                <h5>Award Winning</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <h2 class="section-title">What Our Guests Say</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="testimonial-card">
+              <p>
+                "The Beef Wellington was absolutely divine! The pastry was
+                perfectly flaky and the beef melted in my mouth. Best dining
+                experience in town!"
+              </p>
+              <div class="testimonial-author">- Sarah Johnson</div>
+              <div class="text-warning">★★★★★</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="testimonial-card">
+              <p>
+                "I keep coming back for their Truffle Pasta. The flavors are
+                incredible and the service is always impeccable. Highly
+                recommend!"
+              </p>
+              <div class="testimonial-author">- Michael Chen</div>
+              <div class="text-warning">★★★★★</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="testimonial-card">
+              <p>
+                "The ambiance is perfect for date nights. We tried the tasting
+                menu and every course was a delightful surprise. Worth every
+                penny!"
+              </p>
+              <div class="testimonial-author">- Emma Rodriguez</div>
+              <div class="text-warning">★★★★☆</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Special Offer Section -->
+    <section class="section bg-danger text-white">
+      <div class="container text-center">
+        <h2 class="mb-3">Special Limited Time Offer!</h2>
+        <h3 class="display-3 mb-3">50% OFF All Appetizers</h3>
+        <p class="lead">Weekdays from 3PM - 6PM</p>
+        <a href="/menu" class="btn btn-light btn-lg mt-3">View Special Menu</a>
+      </div>
+    </section>
+
+    <%- include("./partials/scripts") %>
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+
+    <script>
+      function bookTable() {
+        alert("Your table has been successfully booked!");
+      }
+    </script>
+  </body>
 </html>

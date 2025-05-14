@@ -68,3 +68,48 @@ userSchema.statics.matchPassword = async function (email, password) {
   const token = createTokenForUser (user);
   return token;
 }
+
+
+https://nodejs-restaurant-8yzy.onrender.com
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>Home page</title>
+    <style>
+      .hero-section {
+        background-image: url("/uploads/food-menu-restaurant-social-media-banner-template_608606-384.avif");
+        background-size: cover;
+        background-position: center;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-content {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include("./partials/nav") %>
+
+    <div class="hero-section">
+      <div class="hero-content text-center">
+        <h1>Welcome to Our Restaurant!</h1>
+        <p class="lead">Delicious food served with love ❤️</p>
+        <a href="/menu" class="btn btn-primary mt-3">View Menu</a>
+      </div>
+    </div>
+
+    <%- include("./partials/scripts") %>
+  </body>
+</html>

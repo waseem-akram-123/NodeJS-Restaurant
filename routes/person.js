@@ -21,11 +21,11 @@ const { createTokenUser, validateToken } = require("../service/auth");
 // });
 
 router.get("/signup", (req, res) => {
-  res.render("signup", { user: req.user });
+  res.render("signup");
 });
 
 router.get("/signin", (req, res) => {
-  res.render("signin", { user: req.user });
+  res.render("signin");
 });
 
 router.post("/signup", async (req, res) => {
@@ -33,14 +33,6 @@ router.post("/signup", async (req, res) => {
   //   res.status(200).json(person);
   res.redirect("/");
 });
-
-// router.post ("/signin", async (req,res)=> {
-//     const {email,password} = req.body;
-//     const person = await Person.findOne ({email,password});
-
-//     const token = createTokenUser (person);
-//     console.log ("token :", token);
-// })
 
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
@@ -67,7 +59,7 @@ router.post("/signin", async (req, res) => {
 
 router.post("/logout", (req, res) => {
   res.clearCookie("token");
-  res.status(200).json({ message: "Logged out successfully" });
+  res.redirect("/");
 });
 
 router.get("/", async (req, res) => {

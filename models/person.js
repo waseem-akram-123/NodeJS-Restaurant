@@ -3,32 +3,6 @@ const bcrypt = require("bcrypt");
 
 const personSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    age: {
-      type: Number,
-    },
-    work: {
-      type: String,
-      enum: ["chef", "waiter", "manager"],
-      required: true,
-    },
-    mobile: {
-      type: String,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    address: {
-      type: String,
-    },
-    salary: {
-      type: Number,
-    },
     username: {
       type: String,
       required: true,
@@ -36,6 +10,30 @@ const personSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    work: {
+      type: String,
+      enum: ["customer", "chef", "waiter", "manager"],
+      required: true,
+      default: "customer",
+    },
+    age: {
+      type: Number,
+    },
+
+    mobile: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    salary: {
+      type: Number,
     },
   },
   { timestamps: true }
