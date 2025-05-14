@@ -66,13 +66,22 @@
         <p class="lead">
           Where every dish tells a story of passion and tradition
         </p>
-        <a href="/menu" class="btn btn-primary mt-3">View Our Special Menu</a>
+
+        <!-- Book a Table Button First -->
         <a
           href="#reservation"
-          class="btn btn-outline-light mt-3 ms-2"
+          class="btn btn-outline-light mt-3 me-2"
           onclick="bookTable()"
-          >Book a Table</a
         >
+          Book a Table
+        </a>
+
+        <!-- Conditional Button: "Sign In" or "View Menu" -->
+        <% if (user) { %>
+        <a href="/menu" class="btn btn-primary mt-3">View Our Special Menu</a>
+        <% } else { %>
+        <a href="/person/signin" class="btn btn-primary mt-3">Sign In</a>
+        <% } %>
       </div>
     </div>
 
@@ -168,7 +177,10 @@
         <h2 class="mb-3">Special Limited Time Offer!</h2>
         <h3 class="display-3 mb-3">50% OFF All Appetizers</h3>
         <p class="lead">Weekdays from 3PM - 6PM</p>
+
+        <% if (user) { %>
         <a href="/menu" class="btn btn-light btn-lg mt-3">View Special Menu</a>
+        <% } %>
       </div>
     </section>
 
