@@ -2,7 +2,7 @@
 node_modules/
 .env
 dump/
-
-
+info.txt
+log.txt
 # Other entries...
 
