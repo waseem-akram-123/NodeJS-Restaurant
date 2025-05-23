@@ -22,12 +22,12 @@ const personSchema = new mongoose.Schema(
       required: true,
       default: "customer",
     },
-    age: {
-      type: Number,
-    },
-
     mobile: {
       type: String,
+      required: true
+    },
+    age: {
+      type: Number,
     },
     address: {
       type: String,
