@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Menu = require("../models/menu");
 const Order = require("../models/order");
-const { sendSMS } = require("../services/smsService"); // ✅ Import Twilio SMS function
+const { sendSMS } = require("../service/smsService"); // ✅ Import Twilio SMS function
 
 function generateOrderCode() {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
