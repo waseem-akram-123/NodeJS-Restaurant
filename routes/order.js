@@ -40,18 +40,23 @@ router.post("/order", async (req, res) => {
 
     // ✅ Send SMS if user's mobile number is present
     const mobile = populatedOrder.user.mobile;
+    let smsSent = false;
+
     if (mobile) {
       const smsMessage = `Hi ${populatedOrder.user.username}, your order for "${populatedOrder.menuItem.name}" has been placed! Order Code: ${orderCode}`;
       try {
-        await sendSMS(mobile.startsWith('+') ? mobile : `+91${mobile}`, smsMessage); // Add +91 if not included
+        await sendSMS(
+          mobile.startsWith("+") ? mobile : `+91${mobile}`,
+          smsMessage
+        );
+        smsSent = true; // ✅ flag to pass to EJS
         console.log("SMS sent to:", mobile);
       } catch (smsErr) {
         console.error("Error sending SMS:", smsErr.message);
       }
     }
 
-    res.render("order", { order: populatedOrder, user: req.user });
-
+    res.render("order", { order: populatedOrder, user: req.user, smsSent }); // ✅ pass flag
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");

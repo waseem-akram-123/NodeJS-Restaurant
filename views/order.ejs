@@ -147,7 +147,13 @@
       </div>
     </div>
 
-    <%- include("partials/scripts") %>
+    <%- include("partials/scripts") %> <% if (smsSent) { %>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        alert("📩 SMS sent successfully to your number!");
+      });
+    </script>
+    <% } %>
 
     <!-- Bootstrap Icons -->
     <link
